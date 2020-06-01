@@ -4,12 +4,13 @@ import java.util.logging.Logger;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import asw.instagnam.ricetteseguite.domain.ConnessioneCreatedEvent;
-import asw.instagnam.ricetteseguite.domain.Event;
-import asw.instagnam.ricetteseguite.domain.RicettaCreatedEvent;
+import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.connessioniservice.api.event.ConnessioneCreatedEvent;
+import asw.instagnam.ricetteservice.api.event.RicettaCreatedEvent;
 
 
 
@@ -22,31 +23,18 @@ public class MessageListener {
     @Autowired
     private ConsumerService consumerService;
     
-    @KafkaListener(topics = {"${asw.kafka.channel.alpha}","${asw.kafka.channel.beta}"})//, groupId="${asw.kafka.groupid}")
-    public void listen(ConsumerRecord<String, Event> record) throws Exception {
-        logger.info("Ricette-seguite MESSAGE LISTENER: " + record.toString());
-        Event event = record.value();
-        if (event.getClass().equals(ConnessioneCreatedEvent.class))
-        	consumerService.onMessageBeta((ConnessioneCreatedEvent)event);
-        else if(event.getClass().equals(RicettaCreatedEvent.class))
-        	consumerService.onMessage((RicettaCreatedEvent)event); 
-    }
-    
-//    @KafkaListener(topics = {"${asw.kafka.channel.alpha}"})//, groupId="${asw.kafka.groupid}")
-//    public void listen(ConsumerRecord<String, RicettaCreatedEvent> record) throws Exception {
-//        logger.info("Ricette-seguite MESSAGE LISTENER: " + record.toString());
-//        RicettaCreatedEvent message = record.value();
-//        consumerService.onMessage(message); 
-//
-//    }
-//    
-//    @KafkaListener(topics = {"${asw.kafka.channel.beta}"})//, groupId="${asw.kafka.groupid}")
-//    public void listenToChannelBeta(ConsumerRecord<String, ConnessioneCreatedEvent> record) throws Exception {
-//        logger.info("Ricette-seguite MESSAGE LISTENER: " + record.toString());
-//        ConnessioneCreatedEvent message = record.value();
-//        consumerService.onMessageBeta(message); 
-//    }
+    @Value("${asw.kafka.channel.in}")
+	private String channel;
 
+	@Value("${asw.kafka.groupid}")
+	private String groupId;
+    
+    @KafkaListener(topics = "${asw.kafka.channel.in}", groupId="${asw.kafka.groupid}")
+    public void listen(ConsumerRecord<String, DomainEvent> record) throws Exception {
+        logger.info("MESSAGE LISTENER: EVENT RECEIVED");
+        //Event event = record.value();
+        consumerService.onMessage(record.value());
+    }
 
 }
 

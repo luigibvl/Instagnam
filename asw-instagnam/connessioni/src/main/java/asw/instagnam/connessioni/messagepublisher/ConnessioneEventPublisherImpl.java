@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.connessioniservice.api.event.ConnessioneCreatedEvent;
+
 @Component 
 public class ConnessioneEventPublisherImpl implements ConnessioneEventPublisher{
 
@@ -16,18 +19,11 @@ public class ConnessioneEventPublisherImpl implements ConnessioneEventPublisher{
 	    private String channel;
 		
 		@Autowired
-		private KafkaTemplate<String,Event> template;
-		
-//		@Override
-//		public void publish() {
-//			String event="connessione stupid event";
-//			logger.info("PUBLISHING EVENT: " + event.toString() + " ON CHANNEL: " + channel);
-//	        template.send(channel, event);	
-//		}
+		private KafkaTemplate<String, DomainEvent> template;
 		
 		@Override
-		public void publish(Event event) {
-			logger.info("PUBLISHING EVENT: " + ((ConnessioneCreatedEvent)event).getFollower() +" "+((ConnessioneCreatedEvent)event).getFollowed() +" ON CHANNEL: " + channel);
+		public void publish(DomainEvent event) {
+			logger.info("CONNESSIONI PUBLISHING EVENT: " + ((ConnessioneCreatedEvent)event).getFollower() +" "+((ConnessioneCreatedEvent)event).getFollowed() +" ON CHANNEL: " + channel);
 	        template.send(channel, event);	
 		}
 		

@@ -1,11 +1,9 @@
 package asw.instagnam.ricette.messagepublisher;
 
+import asw.instagnam.common.api.event.DomainEvent;
+
 public interface RicettaEventPublisher {
 	
-	//public void publish(RicettaCreatedEvent event);
-	//public void publish();
-	public void publish(Event event);
+	public void publish(DomainEvent event);
 
-
-	
 }

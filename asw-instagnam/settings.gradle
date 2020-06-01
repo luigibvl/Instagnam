@@ -1,3 +1,6 @@
+include 'instagnam-common-api-event'
+include 'ricette-service-api-event'
+include 'connessioni-service-api-event'
 include 'ricette'
 include 'connessioni'
 include 'ricette-seguite'
@@ -5,6 +8,9 @@ include 'api-gateway'
 
 rootProject.name = 'asw-instagnam'
 
+project(':instagnam-common-api-event').name = 'instagnam-common-api-event'
+project(':ricette-service-api-event').name = 'ricette-service-api-event'
+project(':connessioni-service-api-event').name = 'connessioni-service-api-event'
 project(':ricette').name = 'ricette'
 project(':connessioni').name = 'connessioni'
 project(':ricette-seguite').name = 'ricette-seguite'

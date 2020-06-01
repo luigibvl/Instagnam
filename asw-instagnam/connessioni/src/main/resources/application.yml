@@ -39,7 +39,7 @@ spring.jpa.database-platform: org.hibernate.dialect.MySQL8Dialect
 # MESSAGING 
 asw.kafka.producer.name : Producer
 asw.kafka.producer.messages-to-send : 10
-asw.kafka.channel.out: instagnam-beta
+asw.kafka.channel.out: instagnam-alpha
 asw.kafka.groupid: simple
 
 
@@ -50,8 +50,11 @@ spring.kafka.bootstrap-servers: 127.0.0.1:9092
 spring.kafka.consumer.group-id: ${asw.kafka.groupid}
 # spring.kafka.consumer.auto-offset-reset: earliest
 spring.kafka.consumer.auto-offset-reset: latest
+#spring.kafka.producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+spring.kafka.consumer.properties.spring.json.trusted.packages: '*'
 spring.kafka.producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
 spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-#spring.kafka.consumer.properties.spring.json.trusted.packages: *
-
+spring.kafka.consumer.key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 

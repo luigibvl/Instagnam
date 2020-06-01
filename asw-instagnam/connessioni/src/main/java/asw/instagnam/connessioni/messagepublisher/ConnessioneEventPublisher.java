@@ -1,8 +1,9 @@
 package asw.instagnam.connessioni.messagepublisher;
 
+import asw.instagnam.common.api.event.DomainEvent;
+
 public interface ConnessioneEventPublisher {
 	
-//	public void publish();
-	public void publish(Event event);
-	//public void publish(ConnessioneCreatedEvent event);
+	public void publish(DomainEvent event);
+	
 }

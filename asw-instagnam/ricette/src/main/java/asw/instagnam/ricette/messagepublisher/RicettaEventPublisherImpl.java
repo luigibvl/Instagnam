@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.ricetteservice.api.event.RicettaCreatedEvent;
+
 
 @Component 
 public class RicettaEventPublisherImpl implements RicettaEventPublisher {
@@ -17,22 +20,12 @@ public class RicettaEventPublisherImpl implements RicettaEventPublisher {
     private String channel;
 	
 	@Autowired
-	private KafkaTemplate<String, Event> template;
+	private KafkaTemplate<String, DomainEvent> template;
 	
 	@Override
-	public void publish(Event event) {
-		logger.info("PUBLISHING EVENT: " + ((RicettaCreatedEvent)event).getAutore().toString() +" "+ ((RicettaCreatedEvent)event).getTitolo().toString()+" "+((RicettaCreatedEvent)event).getPreparazione().toString()+ " ON CHANNEL: " + channel);
+	public void publish(DomainEvent event) {
+		logger.info("RICETTA PUBLISHING EVENT: " + ((RicettaCreatedEvent)event).getAutore().toString() +" "+ ((RicettaCreatedEvent)event).getTitolo().toString()+" "+((RicettaCreatedEvent)event).getPreparazione().toString()+ " ON CHANNEL: " + channel);
         template.send(channel, event);	
 	}
-	
-//	@Autowired
-//	private KafkaTemplate<String, String> template;
-//	
-//	@Override
-//	public void publish() {
-//		String event="ricetta stupid event";
-//		logger.info("PUBLISHING EVENT: " +event.toString()+ " ON CHANNEL: " + channel);
-//        template.send(channel, event);	
-//	}
 
 }
