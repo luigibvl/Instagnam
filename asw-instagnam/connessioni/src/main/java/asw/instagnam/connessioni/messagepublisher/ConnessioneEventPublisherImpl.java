@@ -23,7 +23,7 @@ public class ConnessioneEventPublisherImpl implements ConnessioneEventPublisher{
 		
 		@Override
 		public void publish(DomainEvent event) {
-			logger.info("CONNESSIONI PUBLISHING EVENT: " + ((ConnessioneCreatedEvent)event).getFollower() +" "+((ConnessioneCreatedEvent)event).getFollowed() +" ON CHANNEL: " + channel);
+			logger.info("CONNESSIONI PUBLISHING EVENT: " + ((ConnessioneCreatedEvent)event).getId().toString() + " " + ((ConnessioneCreatedEvent)event).getFollower() +" "+((ConnessioneCreatedEvent)event).getFollowed() +" ON CHANNEL: " + channel);
 	        template.send(channel, event);	
 		}
 		

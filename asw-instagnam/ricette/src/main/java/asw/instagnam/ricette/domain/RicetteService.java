@@ -26,7 +26,7 @@ public class RicetteService {
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
 		//pubblicazione evento
-		DomainEvent event = new RicettaCreatedEvent(ricetta.getAutore(), ricetta.getTitolo(), ricetta.getPreparazione());
+		DomainEvent event = new RicettaCreatedEvent(ricetta.getId(), ricetta.getTitolo(), ricetta.getPreparazione());
 		ricettaEventPublisher.publish(event);
 		return ricetta;
 	}
@@ -45,5 +45,4 @@ public class RicetteService {
 		Collection<RicettaCompleta> ricette = ricetteRepository.findAllByAutore(autore);
 		return ricette;
 	}
-
 }

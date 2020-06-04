@@ -1,29 +1,29 @@
 package asw.instagnam.ricetteseguite.domain;
 
+import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.connessioniservice.api.event.ConnessioneCreatedEvent;
+import asw.instagnam.ricetteservice.api.event.RicettaCreatedEvent;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*; 
+import java.util.*;
 
-@Service 
+@Service
 public class RicetteSeguiteService {
+	@Autowired
+	RicetteSeguiteRepository ricetteSeguiteRepository;
 
-	@Autowired 
-	private ConnessioniService connessioniService;
-
-	@Autowired 
-	private RicetteService ricetteService;
-
-	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
-	public Collection<Ricetta> getRicetteSeguite(String utente) {
-		Collection<Ricetta> ricette = new ArrayList<>(); 
-		Collection<Connessione> connessioni = connessioniService.getConnessioniByFollower(utente); 
-		for (Connessione connessione : connessioni) {
-			String followed = connessione.getFollowed();
-			Collection<Ricetta> ricetteByFollowed = ricetteService.getRicetteByAutore(followed);
-			ricette.addAll(ricetteByFollowed);
-		}
-		return ricette; 
+	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */
+	public Collection<RicettaSeguita> getRicetteSeguite(String utente) {
+		return ricetteSeguiteRepository.findAllByFollower(utente);
 	}
-	
+
+	public void createRicetteSeguite(Collection<RicettaSeguita> ricetteSeguite){
+		ricetteSeguiteRepository.saveAll(ricetteSeguite);
+	}
+
+
+
 }

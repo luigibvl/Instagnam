@@ -9,6 +9,5 @@ public interface RicetteRepository extends CrudRepository<RicettaCompleta, Long>
 	public Collection<RicettaCompleta> findAll();
 
 	public Collection<RicettaCompleta> findAllByAutore(String autore);
-
 }
 

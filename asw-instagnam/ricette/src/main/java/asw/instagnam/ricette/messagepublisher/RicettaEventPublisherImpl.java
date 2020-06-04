@@ -24,7 +24,7 @@ public class RicettaEventPublisherImpl implements RicettaEventPublisher {
 	
 	@Override
 	public void publish(DomainEvent event) {
-		logger.info("RICETTA PUBLISHING EVENT: " + ((RicettaCreatedEvent)event).getAutore().toString() +" "+ ((RicettaCreatedEvent)event).getTitolo().toString()+" "+((RicettaCreatedEvent)event).getPreparazione().toString()+ " ON CHANNEL: " + channel);
+		logger.info("RICETTA PUBLISHING EVENT: " + ((RicettaCreatedEvent)event).getId().toString() + " " + ((RicettaCreatedEvent)event).getAutore() +" "+ ((RicettaCreatedEvent)event).getTitolo() + " ON CHANNEL: " + channel);
         template.send(channel, event);	
 	}
 

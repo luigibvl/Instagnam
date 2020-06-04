@@ -28,7 +28,7 @@ public class ConnessioniService {
 		Connessione connessione = new Connessione(follower, followed); 
 		connessione = connessioniRepository.save(connessione);
 		//pubblicazione evento
-		DomainEvent connessioneCreatedEvent = new ConnessioneCreatedEvent(connessione.getFollower(),connessione.getFollowed());
+		DomainEvent connessioneCreatedEvent = new ConnessioneCreatedEvent(connessione.getId(),connessione.getFollower(),connessione.getFollowed());
 		connessioneEventPublisher.publish(connessioneCreatedEvent);
 		return connessione;
 	}

@@ -12,16 +12,19 @@ import lombok.NoArgsConstructor;
 //@AllArgsConstructor
 public class RicettaCreatedEvent implements DomainEvent {
 
-	//private Long id; 
+	private Long id;
 	private String autore;
 	private String titolo;
-	private String preparazione;
 
-	public RicettaCreatedEvent(String autore, String titolo, String preparazione) {
+	public RicettaCreatedEvent(Long id, String autore, String titolo) {
+		this.id = id;
 		this.autore = autore;
 		this.titolo = titolo;
-		this.preparazione = preparazione;
 	}
+
+	public Long getId() { return id; }
+
+	public void setId(Long id) { this.id = id; }
 
 	public String getAutore() {
 		return autore;
@@ -37,14 +40,6 @@ public class RicettaCreatedEvent implements DomainEvent {
 
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
-	}
-
-	public String getPreparazione() {
-		return preparazione;
-	}
-
-	public void setPreparazione(String preparazione) {
-		this.preparazione = preparazione;
 	}
 
 }
