@@ -1,0 +1,2 @@
+asw/instagnam/ricetteservice/api/event/RicettaCreatedEvent.java
+ asw.instagnam.ricetteservice.api.event.RicettaCreatedEvent

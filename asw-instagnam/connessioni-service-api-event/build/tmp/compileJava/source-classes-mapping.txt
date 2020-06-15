@@ -1,0 +1,2 @@
+asw/instagnam/connessioniservice/api/event/ConnessioneCreatedEvent.java
+ asw.instagnam.connessioniservice.api.event.ConnessioneCreatedEvent

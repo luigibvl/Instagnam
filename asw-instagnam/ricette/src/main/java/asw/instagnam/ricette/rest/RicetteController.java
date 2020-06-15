@@ -20,7 +20,7 @@ import java.util.*;
 import java.util.stream.*; 
 
 @RestController
-public class RicetteController {
+public class RicetteController{
 
 	@Autowired 
 	private RicetteService ricetteService; 
@@ -66,6 +66,7 @@ public class RicetteController {
 		}
 		return toRicetteBrevi(ricette);
 	}
+	
 	
 	/* Converte una collezione di ricette (in formato completo), in una collezione di ricette (in formato breve). */ 
 	private Collection<Ricetta> toRicetteBrevi(Collection<RicettaCompleta> ricetteComplete) {

@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 import java.util.*; 
 
 @Service
-public class RicetteService {
+@Transactional
+public class RicetteService{
 	
 	@Autowired 
 	private RicetteRepository ricetteRepository;

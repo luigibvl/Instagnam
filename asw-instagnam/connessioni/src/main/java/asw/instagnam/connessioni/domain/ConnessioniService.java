@@ -15,6 +15,7 @@ import java.util.*;
 
 
 @Service
+@Transactional
 public class ConnessioniService {
 
 	@Autowired

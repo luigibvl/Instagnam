@@ -21,7 +21,7 @@ spring:
 
 server: 
   port: ${PORT:${SERVER_PORT:0}}
-#  port: 8080
+  #port: 8080
 
 # fa il logging dei comandi sql eseguiti 
 spring.jpa.show-sql: true
@@ -46,12 +46,9 @@ asw.kafka.groupid: simple
 # KAFKA
 #spring.kafka.bootstrap-servers: ${DOCKER_HOST_IP:10.11.1.121}:9092
 spring.kafka.bootstrap-servers: 127.0.0.1:9092
-#spring.kafka.consumer.group-id: ${asw.kafka.groupid}
 spring.kafka.producer.group-id: ${asw.kafka.groupid}
 # spring.kafka.consumer.auto-offset-reset=earliest
 spring.kafka.consumer.auto-offset-reset: latest
-#spring.kafka.producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 spring.kafka.consumer.properties.spring.json.trusted.packages: '*'
 spring.kafka.producer.key-serializer: org.apache.kafka.common.serialization.StringSerializer
 spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

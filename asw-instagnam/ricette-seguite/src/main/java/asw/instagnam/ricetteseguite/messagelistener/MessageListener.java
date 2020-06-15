@@ -32,7 +32,6 @@ public class MessageListener {
     @KafkaListener(topics = "${asw.kafka.channel.in}", groupId="${asw.kafka.groupid}")
     public void listen(ConsumerRecord<String, DomainEvent> record) throws Exception {
         logger.info("MESSAGE LISTENER: EVENT RECEIVED");
-        //Event event = record.value();
         consumerService.onMessage(record.value());
     }
 
